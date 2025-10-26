@@ -50,6 +50,12 @@ yay -S --needed python --noconfirm
 # Waybar setup
 # ----------------------------------------
 yay -S --needed waybar --noconfirm
+mkdir -p ~/.config/waybar
+cp /etc/xdg/waybar* ~/.config/waybar
+yay -S oft-font-awesome --noconfirm
+yay -S pavucontrol
+pkill waybar
+waybar &
 
 # ----------------------------------------
 # Reflector setup
@@ -73,4 +79,22 @@ sudo pacman -Syy
 echo "Updating system packages..."
 sudo pacman -Syu --noconfirm
 
-pacman -Syu steam --noconfirm
+pacman -Sy steam --noconfirm
+
+# ----------------------------------------
+# Hyprland theme changer - adapt to wallpaper
+# ----------------------------------------
+
+yay -S python-pywal --noconfirm
+
+# ----------------------------------------
+# Install ZSH + oh-my-posh
+# ----------------------------------------
+
+yay -S zsh ttf-font-nerd oh-my-posh --noconfirm
+cd ~
+mkdir .config/ohmyposh
+cd .config/ohmyposh
+oh-my-posh config export --output ./base.json
+echo '# Set oh-my-posh as default' >> ~/.zshrc
+echo 'eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/base.json)"' >> ~/.zshrc
